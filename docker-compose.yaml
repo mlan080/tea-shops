@@ -1,0 +1,12 @@
+version: '3'
+services:
+  tea-shops: &tea-shops
+    build:
+     context: /Users/mandylan/tea-shops/tea-shops
+      dockerfile: Dockerfile
+    image: ruby
+    environment:
+      - ENABLE_WEATHER_MODULE=false
+      - ENABLE_REVIEWS_MODULE=true
+    command: ["build", "--config", "_config.yml,_config_development.yml", "--verbose", "--trace"]
+
