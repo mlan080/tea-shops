@@ -2,7 +2,7 @@ version: '3'
 services:
   tea-shops: &tea-shops
     build:
-     context: /Users/mandylan/tea-shops/tea-shops
+      context: /Users/mandylan/tea-shops
       dockerfile: Dockerfile
     image: ruby
     environment:

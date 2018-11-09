@@ -1,6 +1,6 @@
 FROM ruby:2.5.3-slim-stretch
 
-WORKDIR /app
+WORKDIR /tea-shops
 COPY Gemfile* ./
 
 RUN apk update && apk add --no-cache \
