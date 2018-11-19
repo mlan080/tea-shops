@@ -1,7 +1,13 @@
 FROM ruby:2.5.3-slim-stretch
 
-WORKDIR /app
-
 RUN apt-get update
 
-CMD ["ruby"]
+WORKDIR /app
+ADD Gemfile* ./
+
+RUN bundle install
+
+ADD helloworld.rb ./
+ADD spec/lib/shop_spec.rb ./
+
+CMD ["rspec", "spec/lib/shop_spec.rb"]
