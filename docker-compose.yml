@@ -2,5 +2,9 @@ version: '3'
 services:
   tea-shops:
     build: .
+    volumes:
+      - ./:/tea-shops
+
+
 
 
