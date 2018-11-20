@@ -4,7 +4,3 @@ services:
     build: .
     volumes:
       - ./:/tea-shops
-
-
-
-
