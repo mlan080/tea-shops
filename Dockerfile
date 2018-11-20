@@ -1,8 +1,9 @@
 FROM ruby:2.5.3-slim-stretch
 
 WORKDIR /tea-shops
-
-RUN apt-get update
+COPY Gemfile* ./
+RUN apt-get update \
+&& bundle install
 
 COPY . ./
 
