@@ -1,4 +1,5 @@
 require 'sequel'
+
 DB = Sequel.connect('sqlite://tea-shops.sqlite')
 
 class Shop
@@ -7,10 +8,16 @@ class Shop
     shops = DB[:shops] # Define a dataset, table: shops
     shops.insert(:name => name, :description => description) # Populate the table, :name is column name, name is method accessing the instance variable
   end
-end
 
-#example to show class method
-#def self.sum(a,b) #class method
-#    a+b
-#  end
-#end
+  def initialize
+    @name = "Orange tea cafe"
+  end
+
+  def count
+    return DB[:shops].count
+  end
+
+  def name_matches
+    name == description
+  end
+end

@@ -10,4 +10,3 @@ Sequel.migration do
     drop_table(:shops)
   end
 end
-
