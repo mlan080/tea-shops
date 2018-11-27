@@ -20,4 +20,8 @@ class Shop
   def self.last
     DB[:shops].last
   end
+
+   def self.all
+    DB[:shops].all
+  end
 end
