@@ -9,15 +9,15 @@ class Shop
     shops.insert(:name => name, :description => description) # Populate the table, :name is column name, name is method accessing the instance variable
   end
 
-  def initialize
-    @name = "Orange tea cafe"
+  def initialize(name)
+   @name = name
   end
 
-  def count
-    return DB[:shops].count
+  def self.count #class method - used when functionality does not belong to an.instance of that class
+    DB[:shops].count
   end
 
-  def name_matches
-    name == description
+  def self.last
+    DB[:shops].last
   end
 end
