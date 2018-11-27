@@ -23,5 +23,12 @@ describe Shop do
       #rspec matcher tests if object passed to expect is = to object passed to eq
     end
   end
-end
 
+  describe "#all" do
+    #test db number of shops = Shop.all.count
+    it 'should have same number of shops' do
+      shop = Shop.new "cafe"
+      expect(Shop.all.count).to eq(55)
+    end
+  end
+end

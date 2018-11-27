@@ -20,4 +20,8 @@ class Shop
   def self.last
     DB[:shops].order(:id).last #prevents sequel error: no order specified
   end
+
+  def self.all
+    DB[:shops].all
+  end
 end
