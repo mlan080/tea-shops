@@ -9,7 +9,7 @@ class Shop
     shops.insert(:name => name, :description => description) # Populate the table, :name is column name, name is method accessing the instance variable
   end
 
-  def initialize(name)
+  def initialize(name = nil)
    @name = name
   end
 
@@ -18,6 +18,6 @@ class Shop
   end
 
   def self.last
-    DB[:shops].last
+    DB[:shops].order(:id).last #prevents sequel error: no order specified
   end
 end

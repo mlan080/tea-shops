@@ -11,18 +11,17 @@ describe Shop do
   describe "#create" do
     it 'increments data row by 1' do
       shop = Shop.new "cafe"
-      expect{shop.create}.to change{Shop.count} #counts creates then counts again
+      expect{shop.create}.to change{Shop.count} #counts, creates then counts again
     end
 
     it 'should have the same attributes' do
       shop = Shop.new "cafe"
-      shop.name = "momatcha"
       shop.description = "hot tea"
-      expect{shop.create}.to eq(Shop.last) #rspec matcher tests if object passed to expect is = to object passed to eq
+      shop.create
+      expect(shop.name).to eq(Shop.last[:name]) #[] access column name in db
+      expect(shop.description).to eq(Shop.last[:description])
+      #rspec matcher tests if object passed to expect is = to object passed to eq
     end
-
-      # expect(shop.name_matches).to eq(true)
-      # check that the saved Shop, has the same description and name as we provided earlier
   end
 end
 
