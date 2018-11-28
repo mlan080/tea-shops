@@ -26,7 +26,7 @@ describe Shop do
 
   describe "#all" do
     rows = DB[:shops].all
-    it 'should have same number of shops as db' do
+    it 'should return all rows from the shops table' do
       shop = Shop.new "cafe"
       expect(Shop.all).to eq(rows)
     end
