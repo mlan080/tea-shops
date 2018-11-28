@@ -23,5 +23,12 @@ describe Shop do
       #rspec matcher tests if object passed to expect is = to object passed to eq
     end
   end
-end
 
+  describe "#all" do
+    rows = DB[:shops].all
+    it 'should return all rows from the shops table' do
+      shop = Shop.new "cafe"
+      expect(Shop.all).to eq(rows)
+    end
+  end
+end
