@@ -31,4 +31,11 @@ describe Shop do
       expect(Shop.all).to eq(rows)
     end
   end
+
+  describe "#find" do
+    dataset = DB[:shops].where(id: 15)
+    it 'should return row with id 15 from the shops table' do
+    expect(Shop.find(id: 15)). to eq(dataset)
+    end
+  end
 end

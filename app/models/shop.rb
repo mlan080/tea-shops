@@ -24,4 +24,8 @@ class Shop
   def self.all
     DB[:shops].all
   end
+
+  def self.find(id)
+    DB[:shops].where(id)
+  end
 end
