@@ -25,10 +25,10 @@ describe Shop do
   end
 
   describe "#all" do
-    #test db number of shops = Shop.all.count
-    it 'should have same number of shops' do
+    rows = DB[:shops].all
+    it 'should have same number of shops as db' do
       shop = Shop.new "cafe"
-      expect(Shop.all.count).to eq(55)
+      expect(Shop.all).to eq(rows)
     end
   end
 end
