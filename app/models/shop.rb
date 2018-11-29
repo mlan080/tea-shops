@@ -1,21 +1,17 @@
 require 'sequel'
 
 DB = Sequel.connect('sqlite://tea-shops.sqlite')
-class Shop #< Sequel::Model
+
+class Shop
   attr_accessor :name, :description #instance methods
   def create
     shops = DB[:shops] # Define a dataset, table: shops
     shops.insert(:name => name, :description => description) # Populate the table, :name is column name, name is method accessing the instance variable
   end
 
-  #def initialize(name = nil) #initiliase a class variable when create object
-   #@name = name
-   #name.each{|k,v| public_send("#{k}=",v)}
-  #end
-
   def initialize(hash = {} )
-  @name = hash[:name]
-  @description = hash[:description]
+    @name = hash[:name]
+    @description = hash[:description]
   end
 
   def self.count #class method - used when functionality does not belong to an.instance of that class
