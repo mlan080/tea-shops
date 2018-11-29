@@ -38,5 +38,9 @@ describe Shop do
     it 'should return row with id 15 from the shops table' do
     expect(Shop.find(id:15)).to eq(shop)
     end
+
+    it 'should return name of row with id = 15from the shops table' do
+    expect(shop.values[:name]).to eq('RED')
+    end
   end
 end
