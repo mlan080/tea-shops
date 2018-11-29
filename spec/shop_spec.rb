@@ -31,11 +31,12 @@ describe Shop do
       expect(Shop.all).to eq(rows)
     end
   end
-
+#Is there a
   describe "#find" do
-    dataset = DB[:shops].where(id: 15)
+    #dataset = DB[:shops].where(id: 15)
+    shop = Shop[15] #Model method to fetch record with pk 15
     it 'should return row with id 15 from the shops table' do
-    expect(Shop.find(id: 15)). to eq(dataset)
+    expect(Shop.find(id:15)).to eq(shop)
     end
   end
 end
