@@ -34,4 +34,8 @@ class Shop #< Sequel::Model
     h = DB[:shops].first(:id => id) #sequel doc uses first for retrieving record
     Shop.new(h) #returns a shop object with hash argument
   end
+
+  def set(id, name)
+    DB[:shops].where(id: id).update(name: name)
+  end
 end

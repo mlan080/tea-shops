@@ -38,9 +38,12 @@ describe Shop do
     it 'should return row with id 15 from the shops table' do
     expect(v.name).to eq(shop.name)
     end
+  #end
 
-    #it 'should return name of row with id = 15from the shops table' do
-    #expect(shop.values[:name]).to eq('RED')
-    #end
+ # describe "#update" do
+    #v = Shop.find(15)
+    it'should return updated name Andy' do
+    expect(v.name).to eq(shop.set(15, "pandy"))
+    end
   end
 end
