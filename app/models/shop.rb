@@ -12,7 +12,6 @@ class Shop
   def initialize(hash = {} )
     @name = hash[:name]
     @description = hash[:description]
-  end
 
   def self.count #class method - used when functionality does not belong to an.instance of that class
     DB[:shops].count

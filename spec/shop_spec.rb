@@ -48,9 +48,5 @@ describe Shop do
     it'should return updated name pandy in the database' do
     expect(shop.name).to eq('Pandy')
     end
-
-    it 'should return name of row with id = 15from the shops table' do
-    expect(shop.values[:name]).to eq('RED')
-    end
   end
 end
