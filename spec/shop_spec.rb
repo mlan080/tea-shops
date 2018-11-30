@@ -27,20 +27,20 @@ describe Shop do
   describe "#all" do
     rows = DB[:shops].all
     it 'should return all rows from the shops table' do
-      shop = Shop.new "cafe"
+      shop = Shop.new
       expect(Shop.all).to eq(rows)
     end
   end
-#Is there a
+
   describe "#find" do
-    #dataset = DB[:shops].where(id: 15)
-    shop = Shop[15] #Model method to fetch record with pk 15
+    shop = Shop.new({name: 'RED', description: 'red apples'})
+    v = Shop.find(15)
     it 'should return row with id 15 from the shops table' do
-    expect(Shop.find(id:15)).to eq(shop)
+    expect(v.name).to eq(shop.name)
     end
 
-    it 'should return name of row with id = 15from the shops table' do
-    expect(shop.values[:name]).to eq('RED')
-    end
+    #it 'should return name of row with id = 15from the shops table' do
+    #expect(shop.values[:name]).to eq('RED')
+    #end
   end
 end
