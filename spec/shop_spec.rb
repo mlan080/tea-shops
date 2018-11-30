@@ -47,6 +47,9 @@ describe Shop do
     shop = Shop.find(id)
     it'should return updated name pandy in the database' do
     expect(shop.name).to eq('Pandy')
+
+    it'should return updated name Andy' do
+    expect(v.name).to eq(shop.set(15, "pandy"))
     end
   end
 end
