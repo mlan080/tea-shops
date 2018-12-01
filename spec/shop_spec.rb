@@ -38,12 +38,15 @@ describe Shop do
     it 'should return row with id 15 from the shops table' do
     expect(v.name).to eq(shop.name)
     end
-  #end
+  end
 
- # describe "#update" do
-    #v = Shop.find(15)
-    it'should return updated name Andy' do
-    expect(v.name).to eq(shop.set(15, "pandy"))
+  describe "#update" do
+    id = Shop.new({name: 'Mandy', description: 'be careful'}).create
+    shop = Shop.find(id)
+    shop.set(id, 'Pandy') #updates record in db but not shop variable so pass updated record in next line
+    shop = Shop.find(id)
+    it'should return updated name pandy in the database' do
+    expect(shop.name).to eq('Pandy')
     end
   end
 end
