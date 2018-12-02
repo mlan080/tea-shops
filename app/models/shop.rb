@@ -15,6 +15,14 @@ class Shop
     @id = hash[:id]
     @name = hash[:name]
     @description = hash[:description]
+
+  def initialize(name = nil)
+   @name = name
+    raise 'name is nil'if @name == nil
+    raise 'needs a string for name' unless @name.is_a? String
+    raise 'name is emppty' if @name.empty?
+    #raise 'name is empty or name needs to be set' unless @name --> this includes 1+ 3 together
+    #if name is empty throw an error, same with description
   end
 
   def self.count

@@ -68,6 +68,22 @@ describe Shop do
       shop = Shop.find(shop_id)
 
       expect{ shop.delete }.to change { Shop.count }.by(-1)
+
+  describe "#new" do
+    it 'should validate name and desription' do
+      expect { Shop.new({name: '', description: ''}) }.to raise_error
+    end
+
+    it 'should raise an error if name is missing' do
+      expect { Shop.new({ description: 'hello hello'}) }.to raise_error
+    end
+
+    it 'should raie an error if name is not a string' do
+      expect { Shop.new({ name: 123, description: 'hello hello'}) }.to raise_error
+    end
+
+    it 'should raie an error if name is not a string' do
+       expect { Shop.new({ name: 123, description: 'hello hello'}) }.to raise_error
     end
   end
 end
