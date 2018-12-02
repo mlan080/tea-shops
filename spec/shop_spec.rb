@@ -31,4 +31,13 @@ describe Shop do
       expect(Shop.all).to eq(rows)
     end
   end
+
+  describe '#delete' do
+    it 'should delete the new record from the database' do
+    shop = Shop.new({name: 'ronda', description: 'rowsey'})
+    id = Shop.create
+    shop.delete(id)
+    expect(Shop.find(id)).to eq(nil)
+    end
+  end
 end

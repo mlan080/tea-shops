@@ -24,4 +24,8 @@ class Shop
   def self.all
     DB[:shops].all
   end
+
+  def delete(id)
+    DB[:shops].where(id: id).delete
+  end
 end
