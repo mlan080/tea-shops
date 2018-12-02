@@ -14,8 +14,9 @@ class Shop #< Sequel::Model
   #end
 
   def initialize(hash = {} )
-  @name = hash[:name]
-  @description = hash[:description]
+  #@id = hash[:id]
+    @name = hash[:name]
+    @description = hash[:description]
   end
 
   def self.count #class method - used when functionality does not belong to an.instance of that class
@@ -32,10 +33,15 @@ class Shop #< Sequel::Model
 
   def self.find(id)
     h = DB[:shops].first(:id => id) #sequel doc uses first for retrieving record
+    return nil if h == nil
     Shop.new(h) #returns a shop object with hash argument
   end
 
   def set(id, name)
     DB[:shops].where(id: id).update(name: name)
+  end
+
+  def delete(id)
+    DB[:shops].where(id: id).delete #use @id as instance method
   end
 end
