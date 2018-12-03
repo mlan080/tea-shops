@@ -9,8 +9,9 @@ class Shop
     shops.insert(:name => name, :description => description) # Populate the table, :name is column name, name is method accessing the instance variable
   end
 
-  def initialize(name = nil)
-   @name = name
+  def initialize(hash = {})
+    @name = hash[:name]
+    @description = hash[:description]
   end
 
   def self.count #class method - used when functionality does not belong to an.instance of that class
@@ -23,5 +24,10 @@ class Shop
 
   def self.all
     DB[:shops].all
+  end
+
+  def self.find(id)
+    record = DB[:shops].first(id: id) #sequel doc uses first for retrieving record
+    Shop.new(record) #returns a shop object with hash argument
   end
 end
