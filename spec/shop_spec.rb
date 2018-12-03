@@ -78,12 +78,14 @@ describe Shop do
       expect { Shop.new({ description: 'hello hello'}) }.to raise_error
     end
 
-    it 'should raie an error if name is not a string' do
+    it 'should raise an error if description is missing' do
+       expect { Shop.new({ name: 'mandy'}) }.to raise_error
+    end
+
+    it 'should raise an error if name is not a string' do
       expect { Shop.new({ name: 123, description: 'hello hello'}) }.to raise_error
     end
 
-    it 'should raie an error if name is not a string' do
-       expect { Shop.new({ name: 123, description: 'hello hello'}) }.to raise_error
-    end
+
   end
 end

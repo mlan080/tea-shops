@@ -19,6 +19,7 @@ class Shop
   def initialize(name = nil)
    @name = name
     raise 'name is nil'if @name == nil
+    raise 'description is nil' if @description == nil
     raise 'needs a string for name' unless @name.is_a? String
     raise 'name is emppty' if @name.empty?
     #raise 'name is empty or name needs to be set' unless @name --> this includes 1+ 3 together
