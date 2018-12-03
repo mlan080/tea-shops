@@ -1,6 +1,7 @@
 require 'sequel'
 
 DB = Sequel.connect('sqlite://tea-shops.sqlite')
+
 class Shop
   attr_accessor :name, :description #instance methods
   def create

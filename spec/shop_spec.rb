@@ -44,8 +44,9 @@ describe Shop do
     end
 
     it 'returns the instance class' do
-      s = Shop.find(last_shop[:id])
-      expect(s.class).to eq(Shop)
+      result = Shop.find(last_shop[:id])
+
+      expect(result.class).to eq(Shop)
     end
   end
 end
