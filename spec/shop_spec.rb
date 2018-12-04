@@ -34,12 +34,13 @@ describe Shop do
     end
   end
 
-  describe "#find" do
-
-    shop = Shop.new({name: 'RED', description: 'red apples'})
-    v = Shop.find(15)
+  describe ".find" do
+    let(:shop) { Shop.new({name: 'RED', description: 'red apples'})
+    
     it 'should return row with id 15 from the shops table' do
-    expect(v.name).to eq(shop.name)
+      result = Shop.find(15)
+      
+      expect(result.name).to eq(shop.name)
     end
   end
 
