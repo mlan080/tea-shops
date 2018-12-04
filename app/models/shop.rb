@@ -5,8 +5,9 @@ DB = Sequel.connect('sqlite://tea-shops.sqlite')
 class Shop
   attr_accessor :name, :description #instance methods
   attr_reader :id
+
   def create
-    shops = DB[:shops] # Define a dataset, table: shops
+    shops = DB[:shops]
     shops.insert(:name => name, :description => description) # Populate the table, :name is column name, name is method accessing the instance variable
   end
 
@@ -16,12 +17,12 @@ class Shop
     @description = hash[:description]
   end
 
-  def self.count #class method - used when functionality does not belong to an.instance of that class
+  def self.count
     DB[:shops].count
   end
 
   def self.last
-    DB[:shops].order(:id).last #prevents sequel error: no order specified
+    DB[:shops].order(:id).last
   end
 
   def self.all
@@ -35,5 +36,7 @@ class Shop
 
   def update
     DB[:shops].where(id: id).update(name: name)
+    record = DB[:shops].first(id: id)
+    Shop.new(record) #returns a shop object with hash argument
   end
 end

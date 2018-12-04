@@ -24,13 +24,15 @@ describe Shop do
   end
 
   describe ".all" do
-    rows = DB[:shops].all
-    it 'should return all rows from the shops table' do
+    let(:rows) { DB[:shops].all }
+
+    it 'returns all rows from the shops table' do
+
       expect(Shop.all).to eq(rows)
     end
   end
 
- describe ".find" do
+  describe ".find" do
     before { Shop.new({name: 'cafe', description: 'red apples'}).create }
 
     let(:last_shop) { Shop.all.last } #defining variable to use in spec
@@ -46,7 +48,6 @@ describe Shop do
 
       expect(result.class).to eq(Shop)
     end
-  end
 
   describe "#update" do
     let(:shop_id) { Shop.new({name: 'Mandy', description: 'be careful'}).create }
