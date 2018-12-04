@@ -8,14 +8,9 @@ class Shop #< Sequel::Model
     shops.insert(:name => name, :description => description) # Populate the table, :name is column name, name is method accessing the instance variable
   end
 
-  #def initialize(name = nil) #initiliase a class variable when create object
-   #@name = name
-   #name.each{|k,v| public_send("#{k}=",v)}
-  #end
-
-  def initialize(hash = {} )
-  @name = hash[:name]
-  @description = hash[:description]
+  def initialize(hash = {})
+    @name = hash[:name]
+    @description = hash[:description]
   end
 
   def self.count #class method - used when functionality does not belong to an.instance of that class
@@ -37,5 +32,7 @@ class Shop #< Sequel::Model
 
   def set(id, name)
     DB[:shops].where(id: id).update(name: name)
+    record = DB[:shops].first(id: id) #sequel doc uses first for retrieving record
+    Shop.new(record) #returns a shop object with hash argument
   end
 end
