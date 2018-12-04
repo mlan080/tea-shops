@@ -3,20 +3,19 @@ require_relative '../app/models/shop'
 
 describe Shop do
   it 'responds to name' do #description of your spec/test
-    shop = Shop.new "cafe" #add name to new to prevent Sequel::NotNullConstraintViolation:
+    shop = Shop.new({name:'cafe', desription: 'pink apples'}) #add name to new to prevent Sequel::NotNullConstraintViolation:
     expect(shop).to respond_to(:name)
     #expects shop instance to have an name accessor/method
   end
 
   describe "#create" do
     it 'increments data row by 1' do
-      shop = Shop.new "cafe"
+      shop = Shop.new({name:'cafe', desription: 'pink apples'})
       expect{shop.create}.to change{Shop.count} #counts, creates then counts again
     end
 
     it 'should have the same attributes' do
-      shop = Shop.new "cafe"
-      shop.description = "hot tea"
+      shop = Shop.new({name:'cafe', desription: 'pink apples'})
       shop.create
       expect(shop.name).to eq(Shop.last[:name]) #[] access column name in db
       expect(shop.description).to eq(Shop.last[:description])
@@ -24,32 +23,41 @@ describe Shop do
     end
   end
 
-  describe "#all" do
+  describe ".all" do
     rows = DB[:shops].all
     it 'should return all rows from the shops table' do
-      shop = Shop.new
       expect(Shop.all).to eq(rows)
     end
   end
 
-  describe "#find" do
-    shop = Shop.new({name: 'RED', description: 'red apples'})
-    v = Shop.find(15)
-    it 'should return row with id 15 from the shops table' do
-    expect(v.name).to eq(shop.name)
+ describe ".find" do
+    before { Shop.new({name: 'cafe', description: 'red apples'}).create }
+
+    let(:last_shop) { Shop.all.last } #defining variable to use in spec
+
+    it 'returns the given shop row from shops table' do
+      result = Shop.find(last_shop[:id])
+
+       expect(result.name).to eq('cafe')
+    end
+
+    it 'returns the instance class' do
+      result = Shop.find(last_shop[:id])
+
+      expect(result.class).to eq(Shop)
     end
   end
 
   describe "#update" do
-    id = Shop.new({name: 'Mandy', description: 'be careful'}).create
-    shop = Shop.find(id)
-    shop.set(id, 'Pandy') #updates record in db but not shop variable so pass updated record in next line
-    shop = Shop.find(id)
-    it'should return updated name pandy in the database' do
-    expect(shop.name).to eq('Pandy')
+    let(:shop_id) { Shop.new({name: 'Mandy', description: 'be careful'}).create }
 
-    it'should return updated name Andy' do
-    expect(v.name).to eq(shop.set(15, "pandy"))
+    it'should return updated name Pandy in the database' do
+      shop = Shop.find(shop_id)
+      shop.name = 'Pandy'
+      shop.update
+      shop_result = Shop.find(shop_id) #reloads from the db
+
+      expect(shop_result.name).to eq('Pandy')
     end
   end
 end
