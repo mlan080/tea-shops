@@ -4,9 +4,24 @@
 #
 version: 2
 jobs:
-  build:
+  one:
     docker:
       - image: circleci/ruby:2.5.3
     steps:
       - checkout
       - run: echo "my first hello"
+
+jobs:
+  two:
+    docker:
+      - image: circleci/ruby:2.5.3
+    steps:
+      - checkout
+      - run: echo "my second hello"
+
+workflow:
+  version: 2
+  one_and_two:
+    jobs:
+      - one
+      - two
