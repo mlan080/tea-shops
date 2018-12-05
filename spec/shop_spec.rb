@@ -28,24 +28,21 @@ describe Shop do
 
     it 'returns all rows from the shops table' do
 
-    expect(Shop.all).to eq(rows)
+      expect(Shop.all).to eq(rows)
     end
   end
 
   describe ".find" do
     let(:shop_id) { Shop.new({name: 'Mandy', description: 'be careful'}).create }
 
-    it 'finds the the shop with name Dandy from shops table' do
-      last_shop = Shop.all.last
-      result = Shop.find(last_shop[:id])
-      result.name = 'Dandy'
+    it 'returns the given shop row from shops table' do
+      result = Shop.find(shop_id)
 
-      expect(result.name).to eq('Dandy')
+      expect(result.name).to eq('Mandy')
     end
 
-    it 'returns the instance class' do
-      last_shop = Shop.all.last
-      result = Shop.find(last_shop[:id])
+    it 'returns a Shop instance' do
+      result = Shop.find(shop_id)
 
       expect(result.class).to eq(Shop)
     end
