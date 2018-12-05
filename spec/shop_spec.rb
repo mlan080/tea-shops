@@ -35,7 +35,7 @@ describe Shop do
   describe ".find" do
     let(:shop_id) { Shop.new({name: 'Mandy', description: 'be careful'}).create }
 
-    it 'returns the given shop row from shops table' do
+    it 'finds the the shop with name Dandy from shops table' do
       last_shop = Shop.all.last
       result = Shop.find(last_shop[:id])
       result.name = 'Dandy'
