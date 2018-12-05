@@ -28,37 +28,39 @@ describe Shop do
 
     it 'returns all rows from the shops table' do
 
-      expect(Shop.all).to eq(rows)
+    expect(Shop.all).to eq(rows)
     end
   end
 
   describe ".find" do
-    before { Shop.new({name: 'cafe', description: 'red apples'}).create }
-
-    let(:last_shop) { Shop.all.last } #defining variable to use in spec
+    let(:shop_id) { Shop.new({name: 'Mandy', description: 'be careful'}).create }
 
     it 'returns the given shop row from shops table' do
+      last_shop = Shop.all.last
       result = Shop.find(last_shop[:id])
+      result.name = 'Dandy'
 
-       expect(result.name).to eq('cafe')
+      expect(result.name).to eq('Dandy')
     end
 
     it 'returns the instance class' do
+      last_shop = Shop.all.last
       result = Shop.find(last_shop[:id])
 
       expect(result.class).to eq(Shop)
     end
+  end
 
   describe "#update" do
     let(:shop_id) { Shop.new({name: 'Mandy', description: 'be careful'}).create }
 
-    it'should return updated name Pandy in the database' do
+    it'updates the shop with name Pandy' do
       shop = Shop.find(shop_id)
       shop.name = 'Pandy'
       shop.update
-      shop_result = Shop.find(shop_id) #reloads from the db
+      result = Shop.find(shop_id) #reloads from the db
 
-      expect(shop_result.name).to eq('Pandy')
+      expect(result.name).to eq('Pandy')
     end
   end
 end
