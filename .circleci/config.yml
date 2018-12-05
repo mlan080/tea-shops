@@ -27,5 +27,6 @@ workflows:
     jobs:
       - build
       - test:
-          require: build
+        requires:
+          - build
 
