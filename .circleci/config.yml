@@ -4,14 +4,17 @@
 #
 version: 2
 jobs:
-  one:
+  build:
+    working_directory: ~/tea-shops
     docker:
       - image: circleci/ruby:2.5.3
     steps:
       - checkout
-      - run: echo "my first hello"
+      - run:
+          name: Install rspec
+          command: gem install rspec
 
-  two:
+  test:
     docker:
       - image: circleci/ruby:2.5.3
     steps:
@@ -20,7 +23,9 @@ jobs:
 
 workflows:
   version: 2
-  one_and_two:
+  build_and_test:
     jobs:
-      - one
-      - two
+      - build
+      - test:
+          require: build
+
