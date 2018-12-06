@@ -39,4 +39,8 @@ class Shop
     record = DB[:shops].first(id: id)
     Shop.new(record) #returns a shop object with hash argument
   end
+
+  def delete
+    DB[:shops].where(id: id).delete
+  end
 end
