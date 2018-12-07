@@ -1,0 +1,17 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/tea-shops
+    docker:
+      - image: circleci/ruby:2.5.3
+    steps:
+      - checkout
+      - run:
+          name: bundle install
+          command: bundle install
+      - run:
+          name: sequel migration
+          command: sequel -m db/migrations sqlite://tea-shops.sqlite
+      - run:
+          name: run rspec
+          command: rspec
