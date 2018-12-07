@@ -15,6 +15,7 @@ class Shop
     @id = hash[:id]
     @name = hash[:name]
     @description = hash[:description]
+    @errors = []
   end
 
   def self.count
