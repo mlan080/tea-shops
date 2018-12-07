@@ -73,7 +73,7 @@ describe Shop do
 
   describe "#valid?" do
     context 'When shop is valid' do
-      let (:shop) { Shop.new(name: 'mandy')}
+      let(:shop) { Shop.new(name: 'mandy') }
       it 'valid'
         expect(shop.valid?).to eq(true)
       it 'error message'
@@ -81,7 +81,7 @@ describe Shop do
     end
 
     context 'When shop is invalid' do
-      let (:shop) { Shop.new }
+      let(:shop) { Shop.new }
       it 'invalid'
         expect(shop.valid?).to eq(false)
       it 'error message'

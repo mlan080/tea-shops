@@ -15,6 +15,7 @@ class Shop
     @id = hash[:id]
     @name = hash[:name]
     @description = hash[:description]
+  end
 
   def self.count
     DB[:shops].count
