@@ -68,24 +68,25 @@ describe Shop do
       shop = Shop.find(shop_id)
 
       expect{ shop.delete }.to change { Shop.count }.by(-1)
+    end
+  end
 
-  describe "#new" do
-    it 'should validate name and desription' do
-      expect { Shop.new({name: '', description: ''}) }.to raise_error
+  describe "#valid?" do
+    context 'When shop is valid' do
+      let (:shop) { Shop.new(name: 'mandy')}
+      it 'valid'
+        expect(shop.valid?).to eq(true)
+      it 'error message'
+        expect(shop.errors).to eq([])
     end
 
-    it 'should raise an error if name is missing' do
-      expect { Shop.new({ description: 'hello hello'}) }.to raise_error
+    context 'When shop is invalid' do
+      let (:shop) { Shop.new }
+      it 'invalid'
+        expect(shop.valid?).to eq(false)
+      it 'error message'
+        shop.valid?
+        expect(shop.errors).to eq(["name can't be blank"])
     end
-
-    it 'should raise an error if description is missing' do
-       expect { Shop.new({ name: 'mandy'}) }.to raise_error
-    end
-
-    it 'should raise an error if name is not a string' do
-      expect { Shop.new({ name: 123, description: 'hello hello'}) }.to raise_error
-    end
-
-
   end
 end
