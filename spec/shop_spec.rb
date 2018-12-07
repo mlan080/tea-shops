@@ -64,7 +64,7 @@ describe Shop do
   describe "#delete" do
     let(:shop_id) { Shop.new({name: 'tommy', description: 'is sour'}).create }
 
-    it 'should delete the database record' do
+    it 'deletes the database record' do
       shop = Shop.find(shop_id)
 
       expect{ shop.delete }.to change { Shop.count }.by(-1)
