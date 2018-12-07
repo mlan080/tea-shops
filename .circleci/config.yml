@@ -10,5 +10,10 @@ jobs:
           name: bundle install
           command: bundle install
       - run:
+          name: sequel migration
+          command: sequel -m db/migrations sqlite://tea-shops_ci.sqlite
+      - run:
           name: run rspec
           command: rspec
+
+
