@@ -16,9 +16,6 @@ jobs:
       - run:
           name: sequel migration test
           command: sequel -m db/migrations sqlite://tea-shops_test.sqlite
-       - run:
-          name: sequel migration dev
-          command: sequel -m db/migrations sqlite://tea-shops_dev.sqlite
       - run:
           name: run rspec
           command: rspec
