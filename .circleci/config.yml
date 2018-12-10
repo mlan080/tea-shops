@@ -4,14 +4,17 @@ jobs:
     working_directory: ~/tea-shops
     docker:
       - image: circleci/ruby:2.5.3
+        environment:
+          APP_ENV: 'test'
+
     steps:
       - checkout
       - run:
           name: bundle install
           command: bundle install
       - run:
-          name: sequel migration
-          command: sequel -m db/migrations sqlite://tea-shops.sqlite
+          name: sequel migration test
+          command: sequel -m db/migrations sqlite://tea-shops_test.sqlite
       - run:
           name: run rspec
           command: rspec
