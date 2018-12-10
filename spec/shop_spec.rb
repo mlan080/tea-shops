@@ -72,24 +72,31 @@ describe Shop do
   end
 
   describe "#valid?" do
-    context 'When shop is valid' do
-      let(:shop) { Shop.new(name: 'mandy') }
-      it 'valid' do
-        expect(shop.valid?).to eq(true)
+    context 'When shop has the required attributes' do
+      let(:shop) { Shop.new(name: 'mandy', description: 'is quite radical') }
+
+      it 'is valid' do
+        expect(shop.valid?).to be_truthy
       end
-      it 'error message' do
-        expect(shop.errors).to eq([])
+
+      it 'has no error message' do
+        shop.valid?
+
+        expect(shop.errors).to be_empty
       end
     end
 
-    context 'When shop is invalid' do
+    context 'When shop does not have the required attributes' do
       let(:shop) { Shop.new }
-      it 'invalid' do
-        expect(shop.valid?).to eq(false)
+
+      it 'is invalid' do
+        expect(shop.valid?).to be_falsey
       end
-      it 'error message' do
+
+      it 'has error message' do
         shop.valid?
-        expect(shop.errors).to eq(["name can't be blank"])
+
+        expect(shop.errors).to eq(["name can't be blank", "description can't be blank"])
       end
     end
   end

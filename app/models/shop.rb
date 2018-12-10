@@ -46,7 +46,8 @@ class Shop
   end
 
   def valid?
-    add_error("name can't be blank") if name.to_s.empty? #array error message
+    add_error("name can't be blank") if name.to_s.empty?
+    add_error("description can't be blank") if description.to_s.empty?
 
    !errors.any?
   end
