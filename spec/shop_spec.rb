@@ -70,4 +70,34 @@ describe Shop do
       expect{ shop.delete }.to change { Shop.count }.by(-1)
     end
   end
+
+  describe "#valid?" do
+    context 'When shop has the required attributes' do
+      let(:shop) { Shop.new(name: 'mandy', description: 'is quite radical') }
+
+      it 'is valid' do
+        expect(shop.valid?).to be_truthy
+      end
+
+      it 'has no error message' do
+        shop.valid?
+
+        expect(shop.errors).to be_empty
+      end
+    end
+
+    context 'When shop does not have the required attributes' do
+      let(:shop) { Shop.new }
+
+      it 'is invalid' do
+        expect(shop.valid?).to be_falsey
+      end
+
+      it 'has error message' do
+        shop.valid?
+
+        expect(shop.errors).to eq(["name can't be blank", "description can't be blank"])
+      end
+    end
+  end
 end

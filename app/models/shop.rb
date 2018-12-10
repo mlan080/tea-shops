@@ -4,7 +4,7 @@ DB = Sequel.connect('sqlite://tea-shops.sqlite')
 
 class Shop
   attr_accessor :name, :description #instance methods
-  attr_reader :id
+  attr_reader :id, :errors
 
   def create
     shops = DB[:shops]
@@ -15,6 +15,7 @@ class Shop
     @id = hash[:id]
     @name = hash[:name]
     @description = hash[:description]
+    @errors = []
   end
 
   def self.count
@@ -43,4 +44,16 @@ class Shop
   def delete
     DB[:shops].where(id: id).delete
   end
+
+  def valid?
+    add_error("name can't be blank") if name.to_s.empty?
+    add_error("description can't be blank") if description.to_s.empty?
+
+   !errors.any?
+  end
+
+  private
+    def add_error(message)
+      @errors << message #pushing message to an array
+    end
 end
