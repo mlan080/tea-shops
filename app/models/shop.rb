@@ -1,5 +1,4 @@
-require 'sequel'
-require 'config/database.rb'
+require_relative '../../config/database'
 
 class Shop
   attr_accessor :name, :description #instance methods
