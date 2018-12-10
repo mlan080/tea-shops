@@ -4,6 +4,10 @@ jobs:
     working_directory: ~/tea-shops
     docker:
       - image: circleci/ruby:2.5.3
+
+        environment:
+          APP_ENV: 'test'
+
     steps:
       - checkout
       - run:
