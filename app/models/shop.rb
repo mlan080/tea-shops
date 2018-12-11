@@ -26,7 +26,8 @@ class Shop
   end
 
   def self.all
-    DB[:shops].all
+    all_records = DB[:shops].all
+    Shop.new(all records)
   end
 
   def self.find(id)
