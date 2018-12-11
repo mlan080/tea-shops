@@ -1,5 +1,4 @@
-require 'rspec'
-require_relative '../app/models/shop'
+require 'spec_helper'
 
 describe Shop do
   it 'responds to name' do #description of your spec/test
