@@ -15,11 +15,21 @@ describe Shop do
     end
 
     it 'should have the same attributes' do
-      shop = Shop.new({name:'cafe', desription: 'pink apples'})
+      shop = Shop.new({name:'hello', desription: 'dinosaur'})
       shop.create
       expect(shop.name).to eq(Shop.last[:name]) #[] access column name in db
       expect(shop.description).to eq(Shop.last[:description])
       #rspec matcher tests if object passed to expect is = to object passed to eq
+    end
+  end
+
+  describe "#last" do
+    let!(:first_shop) { Shop.new({name: 'Mando', description: 'is hot stuff'}).create }
+    let!(:second_shop) { Shop.new({name: 'Mandaline', description: 'is hotter stuff'}).create }
+
+    it 'returns last row from the shops table' do
+
+      expect(Shop.last.id).to eq(second_shop)
     end
   end
 
