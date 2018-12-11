@@ -9,17 +9,11 @@ describe Shop do
   end
 
   describe "#create" do
-    it 'increments data row by 1' do
-      shop = Shop.new({name:'cafe', desription: 'pink apples'})
-      expect{shop.create}.to change{Shop.count} #counts, creates then counts again
-    end
+    let(:shop) {Shop.new({name:'hello', desription: 'dinosaur'}).create }
 
-    it 'should have the same attributes' do
-      shop = Shop.new({name:'hello', desription: 'dinosaur'})
-      shop.create
-      expect(shop.name).to eq(Shop.last[:name]) #[] access column name in db
-      expect(shop.description).to eq(Shop.last[:description])
-      #rspec matcher tests if object passed to expect is = to object passed to eq
+    it 'increments data row by 1' do
+
+      expect{shop}.to change{Shop.count} #counts, creates then counts again
     end
   end
 
