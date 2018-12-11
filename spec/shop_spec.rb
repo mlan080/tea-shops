@@ -29,7 +29,6 @@ describe Shop do
     let!(:second_shop) { Shop.new({name: 'Mandaline', description: 'is hotter stuff'}).create }
 
     it 'returns last row from the shops table' do
-
       expect(Shop.last.id).to eq(second_shop)
     end
   end
@@ -38,7 +37,6 @@ describe Shop do
     let(:rows) { DB[:shops].all }
 
     it 'returns all rows from the shops table' do
-
       expect(Shop.all).to eq(rows)
     end
   end
