@@ -8,17 +8,27 @@ describe Shop do
   end
 
   describe "#create" do
+    let(:shop) { Shop.new({name:'hello', desription: 'dinosaur'}) }
+
     it 'increments data row by 1' do
-      shop = Shop.new({name:'cafe', desription: 'pink apples'})
       expect{shop.create}.to change{Shop.count} #counts, creates then counts again
     end
 
-    it 'should have the same attributes' do
-      shop = Shop.new({name:'cafe', desription: 'pink apples'})
-      shop.create
-      expect(shop.name).to eq(Shop.last[:name]) #[] access column name in db
-      expect(shop.description).to eq(Shop.last[:description])
-      #rspec matcher tests if object passed to expect is = to object passed to eq
+    it 'has the same attributes' do
+      shop_id = shop.create
+      last_shop = Shop.last
+
+      expect(last_shop.id).to eq(shop_id)
+      expect(last_shop.name).to eq(shop.name)
+    end
+  end
+
+  describe "#last" do
+    let!(:first_shop) { Shop.new({name: 'Mando', description: 'is hot stuff'}).create }
+    let!(:second_shop) { Shop.new({name: 'Mandaline', description: 'is hotter stuff'}).create }
+
+    it 'returns last row from the shops table' do
+      expect(Shop.last.id).to eq(second_shop)
     end
   end
 
@@ -26,7 +36,6 @@ describe Shop do
     let(:rows) { DB[:shops].all }
 
     it 'returns all rows from the shops table' do
-
       expect(Shop.all).to eq(rows)
     end
   end

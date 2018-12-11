@@ -21,7 +21,8 @@ class Shop
   end
 
   def self.last
-    DB[:shops].order(:id).last
+    last_record = DB[:shops].order(:id).last
+    Shop.new(last_record)
   end
 
   def self.all
