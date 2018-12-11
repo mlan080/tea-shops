@@ -9,11 +9,18 @@ describe Shop do
   end
 
   describe "#create" do
-    let(:shop) {Shop.new({name:'hello', desription: 'dinosaur'}).create }
+    let(:shop) { Shop.new({name:'hello', desription: 'dinosaur'}) }
 
     it 'increments data row by 1' do
+      expect{shop.create}.to change{Shop.count} #counts, creates then counts again
+    end
 
-      expect{shop}.to change{Shop.count} #counts, creates then counts again
+    it 'has the same attributes' do
+      shop_id = shop.create
+      last_shop = Shop.last
+
+      expect(last_shop.id).to eq(shop_id)
+      expect(last_shop.name).to eq(shop.name)
     end
   end
 
