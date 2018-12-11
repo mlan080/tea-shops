@@ -23,6 +23,15 @@ describe Shop do
     end
   end
 
+  describe "#count" do
+    let!(:first_shop) { Shop.new({name: 'Dando', description: 'is hot stuff'}).create }
+    let!(:second_shop) { Shop.new({name: 'Dandaline', description: 'is hotter stuff'}).create }
+
+    it 'counts number of rows from the shops table' do
+      expect(Shop.count).to eq(2)
+    end
+  end
+
   describe "#last" do
     let!(:first_shop) { Shop.new({name: 'Mando', description: 'is hot stuff'}).create }
     let!(:second_shop) { Shop.new({name: 'Mandaline', description: 'is hotter stuff'}).create }
