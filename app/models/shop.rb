@@ -17,32 +17,31 @@ class Shop
   end
 
   def self.count
-    DB[:shops].count
+    collection.count
   end
 
   def self.last
-    last_record = DB[:shops].order(:id).last
+    last_record = collection.order(:id).last
     Shop.new(last_record)
   end
 
   def self.all
-    all_records = DB[:shops].all
-    all_records.map{ |attrs| Shop.new(attrs) }
+    collection.all.map{ |attrs| Shop.new(attrs) }
   end
 
   def self.find(id)
-    record = DB[:shops].first(:id => id) #sequel doc uses first for retrieving record
+    record = collection.first(:id => id) #sequel doc uses first for retrieving record
     Shop.new(record) #returns a shop object with hash argument
   end
 
   def update
-    DB[:shops].where(id: id).update(name: name)
-    record = DB[:shops].first(id: id)
+    self.class.collection.where(id: id).update(name: name)
+    record = self.class.collection.first(id: id)
     Shop.new(record) #returns a shop object with hash argument
   end
 
   def delete
-    DB[:shops].where(id: id).delete
+    self.class.collection.where(id: id).delete
   end
 
   def valid?
@@ -50,6 +49,10 @@ class Shop
     add_error("description can't be blank") if description.to_s.empty?
 
    !errors.any?
+  end
+
+  def self.collection
+    DB[:shops]
   end
 
   private
