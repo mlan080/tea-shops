@@ -35,7 +35,7 @@ class Shop
   end
 
   def update
-    class.collection.where(id: id).update(name: name)
+    self.class.collection.where(id: id).update(name: name)
     record = self.class.collection.first(id: id)
     Shop.new(record) #returns a shop object with hash argument
   end
