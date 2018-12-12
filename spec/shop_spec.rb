@@ -42,10 +42,14 @@ describe Shop do
   end
 
   describe ".all" do
-    let(:rows) { DB[:shops].all }
+    #let(:rows) { DB[:shops].all }
+    let!(:first_shop) { Shop.new({name: 'Mando', description: 'is hot stuff'}).create }
+    let!(:second_shop) { Shop.new({name: 'Mandaline', description: 'is hotter stuff'}).create }
 
     it 'returns all rows from the shops table' do
-      expect(Shop.all).to eq(rows)
+      got = Shop.all.map{|x| x.id}
+      expect(got).to eq([first_shop, second_shop])
+      puts got
     end
   end
 

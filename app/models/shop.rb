@@ -26,8 +26,9 @@ class Shop
   end
 
   def self.all
+    #DB[:shops].all
     all_records = DB[:shops].all
-    Shop.new(all records)
+    all_records.map{|x| Shop.new(x)}
   end
 
   def self.find(id)
