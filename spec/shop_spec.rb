@@ -121,7 +121,6 @@ describe Shop do
   end
 
   describe "#.collection" do
-
     it 'returns collection from the shops table in the database' do
       shop = Shop.collection
       expect(shop).to eq(DB[:shops])

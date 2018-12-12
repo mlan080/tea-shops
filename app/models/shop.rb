@@ -35,14 +35,13 @@ class Shop
   end
 
   def update
-    self.class.collection.where(id: id).update(name: name)
+    class.collection.where(id: id).update(name: name)
     record = self.class.collection.first(id: id)
     Shop.new(record) #returns a shop object with hash argument
   end
 
   def delete
     self.class.collection.where(id: id).delete
-
   end
 
   def valid?
