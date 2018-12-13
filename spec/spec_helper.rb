@@ -1,6 +1,12 @@
+require 'simplecov'
+SimpleCov.start
+
+ENV['APP_ENV'] ||= 'test'
+
 require 'rspec'
 require 'database_cleaner'
 require 'sequel'
+
 require_relative '../app/models/shop'
 
 RSpec.configure do |config|
