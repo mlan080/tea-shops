@@ -8,21 +8,18 @@ describe Shop do
   end
 
   describe "#create" do
-    let!(:shop) { Shop.new({name:'hello', desription: 'dinosaur'}).create }
+    let(:shop) { Shop.new({name:'hello', desription: 'dinosaur'}) }
 
     it 'increments data row by 1' do
       expect{shop.create}.to change{Shop.count} #counts, creates then counts again
     end
 
     it 'has the same attributes' do
+      shop_id = shop.create
       last_shop = Shop.last
-      expect(last_shop.id).to eq(shop.id)
-      expect(last_shop.name).to eq(shop.name)
-      expect(last_shop.description).to eq(shop.description)
-    end
 
-    it 'returns a Shop istance' do
-      expect(shop).to be_kind_of(Shop)
+      expect(last_shop.id).to eq(shop_id)
+      expect(last_shop.name).to eq(shop.name)
     end
   end
 
@@ -40,7 +37,7 @@ describe Shop do
     let!(:second_shop) { Shop.new({name: 'Mandaline', description: 'is hotter stuff'}).create }
 
     it 'returns last row from the shops table' do
-      expect(Shop.last.name).to eq(second_shop.name)
+      expect(Shop.last.id).to eq(second_shop)
     end
   end
 
@@ -50,42 +47,45 @@ describe Shop do
 
     it 'returns all rows from the shops table' do
       all_shops = Shop.all.map(&:id) #{|x| x.id}
-      expect(all_shops).to eq([first_shop.id, second_shop.id])
+      expect(all_shops).to eq([first_shop, second_shop])
     end
   end
 
   describe ".find" do
-    let!(:shop) { Shop.new({name: 'Mandy', description: 'be careful'}).create }
+    let(:shop_id) { Shop.new({name: 'Mandy', description: 'be careful'}).create }
 
     it 'returns the given shop row from shops table' do
-      result = Shop.find(shop.id)
+      result = Shop.find(shop_id)
 
       expect(result.name).to eq('Mandy')
     end
 
     it 'returns a Shop instance' do
-      result = Shop.find(shop.id)
+      result = Shop.find(shop_id)
 
       expect(result.class).to eq(Shop)
     end
   end
 
   describe "#update" do
-    let!(:shop) { Shop.new({name: 'Mandy', description: 'be careful'}).create }
+    let(:shop_id) { Shop.new({name: 'Mandy', description: 'be careful'}).create }
 
     it'updates the shop with name Pandy' do
+      shop = Shop.find(shop_id)
       shop.name = 'Pandy'
       shop.update
-      result = Shop.find(shop.id) #reloads from the db
+      result = Shop.find(shop_id) #reloads from the db
 
       expect(result.name).to eq('Pandy')
     end
   end
 
   describe "#delete" do
-    let!(:shop) { Shop.new({name: 'tommy', description: 'is sour'}).create }
+    let(:shop_id) { Shop.new({name: 'tommy', description: 'is sour'}).create }
 
     it 'deletes the database record' do
+      shop = Shop.find(shop_id)
+
       expect{ shop.delete }.to change { Shop.count }.by(-1)
     end
   end
@@ -127,4 +127,3 @@ describe Shop do
     end
   end
 end
-
