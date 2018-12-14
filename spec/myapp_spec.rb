@@ -1,5 +1,4 @@
 require 'spec_helper'
-require_relative '../myapp.rb'
 
 describe 'myapp' do
   include Rack::Test::Methods
