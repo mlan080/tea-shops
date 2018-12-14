@@ -6,6 +6,7 @@ ENV['APP_ENV'] ||= 'test'
 require 'rspec'
 require 'database_cleaner'
 require 'sequel'
+require 'rack/test'
 
 require_relative '../app/models/shop'
 
