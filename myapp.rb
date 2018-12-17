@@ -1,7 +1,8 @@
 require 'sinatra'
 require 'json'
+require_relative 'app/models/shop'
 
-get '/' do
+get '/v1/shops' do
   content_type :json
-  { message: 'Hello World' }.to_json
+  Shop.all.to_json
 end
