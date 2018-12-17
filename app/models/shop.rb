@@ -56,6 +56,14 @@ class Shop
     DB[:shops]
   end
 
+  def to_json(options={})
+    {
+      id: @id,
+      name: @name,
+      description: @description
+    }.to_json
+  end
+
   private
     def add_error(message)
       @errors << message #pushing message to an array
