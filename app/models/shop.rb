@@ -1,8 +1,8 @@
 require_relative '../../config/database'
 
 class Shop
-  attr_accessor :name, :description #instance methods
-  attr_reader :id, :errors
+  attr_accessor :id, :name, :description #instance methods
+  attr_reader :errors
 
   def create
     shops = DB[:shops]

@@ -1,4 +1,5 @@
 require 'spec_helper'
+require_relative '../app/models/shop'
 
 describe 'myapp' do
   include Rack::Test::Methods
@@ -9,7 +10,13 @@ describe 'myapp' do
 
   describe 'root path' do
     before do
-      get '/'
+      @shop = Shop.new({name: 'mandy', description: 'bla'})
+      @shop.id = @shop.create
+      get '/v1/shops'
+    end
+
+    after do
+      @shop.delete
     end
 
     it 'should be successfull' do
@@ -20,9 +27,9 @@ describe 'myapp' do
       expect(last_response.content_type).to eq('application/json')
     end
 
-    it 'should return a hello world message' do
+    it 'returns  shops in json' do
       response_data = JSON.parse(last_response.body)
-      expect(response_data['message']).to eq('Hello World')
+      expect(response_data).to eq([{"description"=>"bla", "id"=>7, "name"=>"mandy"}])
     end
   end
 end
