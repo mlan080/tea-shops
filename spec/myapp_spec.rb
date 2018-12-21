@@ -29,7 +29,7 @@ describe 'myapp' do
 
     it 'returns  shops in json' do
       response_data = JSON.parse(last_response.body)
-      expect(response_data).to eq([{"description"=>"bla", "id"=>7, "name"=>"mandy"}])
+      expect(response_data).to eq([{"description"=>"bla", "id"=> @shop.id, "name"=>"mandy"}])
     end
   end
 end
