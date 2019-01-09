@@ -9,25 +9,20 @@ describe 'myapp' do
   end
 
   describe 'root path' do
-    before do
-      @shop = Shop.new({name: 'mandy', description: 'bla'})
-      @shop.id = @shop.create
+      let(:shop) {Shop.new({name: 'mandy', description: 'bla'}) }
+      let(:shop) { Shop.create }
       get '/v1/shops'
-    end
 
-    after do
-      @shop.delete
-    end
 
-    it 'should be successfull' do
+    it 'returns successful json response' do
       expect(last_response).to be_ok
     end
 
-    it 'should be a json response' do
+    it 'returns response in json format' do
       expect(last_response.content_type).to eq('application/json')
     end
 
-    it 'returns  shops in json' do
+    it 'returns shops in json' do
       response_data = JSON.parse(last_response.body)
       expect(response_data).to eq([{"description"=>"bla", "id"=> @shop.id, "name"=>"mandy"}])
     end
