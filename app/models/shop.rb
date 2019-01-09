@@ -2,7 +2,7 @@ require_relative '../../config/database'
 
 class Shop
   attr_accessor :id, :name, :description #instance methods
-  attr_reader :errors
+  attr_reader :id, :errors
 
   def create
     id = DB[:shops].insert(name: self.name, description: self.description) #self refers to the object calling the create method
@@ -58,9 +58,9 @@ class Shop
 
   def to_json(options={})
     {
-      id: @id,
-      name: @name,
-      description: @description
+      id: id,
+      name: name,
+      description: description
     }.to_json
   end
 
