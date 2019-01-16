@@ -9,10 +9,10 @@ describe 'myapp' do
   end
 
   describe 'root path' do
-      let(:shop) {Shop.new({name: 'mandy', description: 'bla'}) }
-      let(:shop) { Shop.create }
-      get '/v1/shops'
-
+    let(:shop) do
+      id = Shop.new({name: 'mandy', description: 'bla'}).create
+      Shop.find(id)
+    end
 
     it 'returns successful json response' do
       expect(last_response).to be_ok
