@@ -8,7 +8,6 @@ require 'database_cleaner'
 require 'sequel'
 require 'rack/test'
 
-require_relative '../app/models/shop'
 require_relative '../myapp.rb'
 
 RSpec.configure do |config|
