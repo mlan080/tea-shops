@@ -9,9 +9,13 @@ describe 'myapp' do
   end
 
   describe 'root path' do
-    let(:shop) do
+    let!(:shop) do
       id = Shop.new({name: 'mandy', description: 'bla'}).create
       Shop.find(id)
+    end
+
+    before do
+      get '/v1/shops'
     end
 
     it 'returns successful json response' do
@@ -23,8 +27,9 @@ describe 'myapp' do
     end
 
     it 'returns shops in json' do
+
       response_data = JSON.parse(last_response.body)
-      expect(response_data).to eq([{"description"=>"bla", "id"=> @shop.id, "name"=>"mandy"}])
+      expect(response_data).to eq([{"description"=>"bla", "id"=> shop.id, "name"=>"mandy"}])
     end
   end
 end
