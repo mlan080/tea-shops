@@ -5,8 +5,8 @@ class Shop
   attr_reader :id, :errors
 
   def create
-    shops = DB[:shops]
-    shops.insert(:name => name, :description => description) # Populate the table, :name is column name, name is method accessing the instance variable
+    id = DB[:shops].insert(name: self.name, description: self.description) #self refers to the object calling the create method
+    Shop.find(id) #return the shop object
   end
 
   def initialize(hash = {})
@@ -22,6 +22,7 @@ class Shop
 
   def self.last
     last_record = collection.order(:id).last
+    puts last_record.inspect
     Shop.new(last_record)
   end
 
@@ -30,7 +31,7 @@ class Shop
   end
 
   def self.find(id)
-    record = collection.first(:id => id) #sequel doc uses first for retrieving record
+    record = collection.first(id: id) #sequel doc uses first for retrieving record
     Shop.new(record) #returns a shop object with hash argument
   end
 
