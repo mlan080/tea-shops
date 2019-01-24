@@ -1,7 +1,7 @@
 require_relative '../../config/database'
 
 class Shop
-  attr_accessor :id, :name, :description #instance methods
+  attr_accessor :name, :description #instance methods
   attr_reader :id, :errors
 
   def create
@@ -22,7 +22,6 @@ class Shop
 
   def self.last
     last_record = collection.order(:id).last
-    puts last_record.inspect
     Shop.new(last_record)
   end
 
