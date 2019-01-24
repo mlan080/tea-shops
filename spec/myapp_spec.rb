@@ -9,10 +9,7 @@ describe 'myapp' do
   end
 
   describe 'root path' do
-    let!(:shop) do
-      id = Shop.new({name: 'mandy', description: 'bla'}).create
-      Shop.find(id)
-    end
+    let!(:shop) { Shop.new({name: 'mandy', description: 'bla'}).create }
 
     before do
       get '/v1/shops'
