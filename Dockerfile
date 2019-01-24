@@ -10,4 +10,4 @@ RUN bundle install
 
 COPY . ./
 
-CMD ["ruby", "helloworld.rb"]
+CMD ["ruby", "myapp.rb", "-o", "0.0.0.0"]

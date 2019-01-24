@@ -1,7 +1,7 @@
 require_relative '../../config/database'
 
 class Shop
-  attr_accessor :name, :description #instance methods
+  attr_accessor :id, :name, :description #instance methods
   attr_reader :id, :errors
 
   def create
@@ -54,6 +54,14 @@ class Shop
 
   def self.collection
     DB[:shops]
+  end
+
+  def to_json(options={})
+    {
+      id: id,
+      name: name,
+      description: description
+    }.to_json
   end
 
   private

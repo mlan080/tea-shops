@@ -127,3 +127,4 @@ describe Shop do
     end
   end
 end
+
