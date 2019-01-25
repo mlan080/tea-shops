@@ -15,3 +15,7 @@ get '/v1/shops/:id' do
   shop.to_json
 end
 
+post '/v1/shops' do
+  shop = Shop.new(name: "", description: "").create
+  "201 created"
+end
