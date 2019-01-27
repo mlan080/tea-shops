@@ -8,8 +8,9 @@ get '/v1/shops' do
 end
 
 put '/v1/shops/:id' do
+  payload = JSON.parse(request.body.read)
   shop = Shop.find(params[:id])
-  shop.name = ""
+  shop.name = payload["name"]
   shop.update
-  "204 content not found"
+  204
 end
