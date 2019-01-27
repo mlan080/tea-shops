@@ -8,6 +8,7 @@ get '/v1/shops' do
 end
 
 post '/v1/shops' do
-  shop = Shop.new(name: "", description: "").create
-  "201 created"
+  payload = JSON.parse(request.body.read)
+  shop = Shop.new(name: payload["name"], description: payload["description"]).create
+  201
 end
