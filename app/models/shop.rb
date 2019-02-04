@@ -17,7 +17,7 @@ class Shop
   end
 
   def self.count
-    collection.count
+    collection.counts
   end
 
   def self.last
@@ -34,8 +34,8 @@ class Shop
     Shop.new(record) #returns a shop object with hash argument
   end
 
-  def update
-    self.class.collection.where(id: id).update(name: name)
+  def update(payload)
+    self.class.collection.where(id: id).update(payload)
     record = self.class.collection.first(id: id)
     Shop.new(record) #returns a shop object with hash argument
   end
