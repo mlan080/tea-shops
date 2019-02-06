@@ -24,24 +24,24 @@ describe 'myapp' do
     end
 
     it 'returns shops in json' do
-
       response_data = JSON.parse(last_response.body)
       expect(response_data).to eq([{"description"=>"bla", "id"=> shop.id, "name"=>"mandy"}])
     end
   end
 
-  describe "GET /shops/:id" do
-    let!(:shop) { Shop.new({id: 1, name: 'RedPanda', description: 'It is fluffy'}).create }
+  describe "GET v1/shops/:id" do
+    let!(:shop) { Shop.new({name: "RedPanda", description: "It is fluffy"}).create }
 
-    let(:response) { get "/v1/shops/1" }
+    let(:response) { get "/v1/shops/#{shop.id}" }
 
     it 'returns status 200 OK' do
-     expect(response.status).to eq 200
+      expect(Shop.last).not_to eq(nil)
+      expect(response.status).to eq 200
     end
 
     it 'displays the shops name and description' do
      response_data = JSON.parse(response.body)
-     expect(response_data).to eq([{"name"=>"hello", "description"=>"fuzzy"}])
+     expect(response_data).to eq("id" => shop.id, "name" => "RedPanda", "description" => "It is fluffy")
     end
   end
 end
